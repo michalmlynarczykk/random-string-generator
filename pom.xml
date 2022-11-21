@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>michalmlynarczyk</groupId>
-	<artifactId>recruitmenttask</artifactId>
+	<artifactId>random-string-generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>recruitmenttask</name>
+	<name>random-string-generator</name>
 	<description>Edrone - Recruitment task for the position of Junior Back-End engineer</description>
 	<properties>
 		<java.version>17</java.version>
