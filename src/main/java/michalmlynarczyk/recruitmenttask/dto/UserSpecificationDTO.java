@@ -17,5 +17,5 @@ public class UserSpecificationDTO {
     private Integer maxLength;
 
     @NotNull(message = "Number of strings is required")
-    private Integer numberOfStrings;
+    private Long numberOfStrings;
 }
