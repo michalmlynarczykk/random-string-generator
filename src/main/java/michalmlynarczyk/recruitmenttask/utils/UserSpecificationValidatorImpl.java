@@ -13,7 +13,7 @@ public class UserSpecificationValidatorImpl implements UserSpecificationValidato
     public void validate(UserSpecificationDTO userSpecification) throws SpecificationNotValidException {
         Integer minLength = userSpecification.getMinLength();
         Integer maxLength = userSpecification.getMaxLength();
-        Integer numberOfStrings = userSpecification.getNumberOfStrings();
+        Long numberOfStrings = userSpecification.getNumberOfStrings();
         Set<Character> characters = userSpecification.getCharacters();
         if (minLength < 1) {
             throw new SpecificationNotValidException("Minimal length cannot be less than 1");
@@ -22,7 +22,7 @@ public class UserSpecificationValidatorImpl implements UserSpecificationValidato
             throw new SpecificationNotValidException("Minimal length cannot be greater than maximal length");
         }
 
-        int sumOfPossibleUniqueStrings = calculateNumberOfPossibleUniqueStrings(
+        Long sumOfPossibleUniqueStrings = calculateNumberOfPossibleUniqueStrings(
                 minLength,
                 maxLength,
                 characters
@@ -33,11 +33,14 @@ public class UserSpecificationValidatorImpl implements UserSpecificationValidato
         }
     }
 
-    private int calculateNumberOfPossibleUniqueStrings(Integer minLength,
-                                                       Integer maxLength,
-                                                       Set<Character> characters) {
+    private Long calculateNumberOfPossibleUniqueStrings(Integer minLength,
+                                                        Integer maxLength,
+                                                        Set<Character> characters) {
+        /* this method calculates how many unique strings we can create with given specification, example:
+        minLength=2 maxLength=3 characters= a,b unique strings: aa,bb,ba,aab,abb,bbb etc. */
+
         int numberOfCharacters = characters.size();
-        int sumOfPossibleUniqueStrings = 0;
+        long sumOfPossibleUniqueStrings = 0L;
         for (int n = minLength; n <= maxLength; n++) {
             sumOfPossibleUniqueStrings += Math.pow(numberOfCharacters, n);
         }
