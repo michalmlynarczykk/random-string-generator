@@ -30,8 +30,8 @@ public class UserSpecification {
 
     private Integer maxLength;
 
-    private Integer numberOfStrings;
+    private Long numberOfStrings;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Character> characters;
 }
