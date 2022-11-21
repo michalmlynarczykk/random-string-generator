@@ -15,9 +15,6 @@ public class UserSpecificationValidatorImpl implements UserSpecificationValidato
         Integer maxLength = userSpecification.getMaxLength();
         Long numberOfStrings = userSpecification.getNumberOfStrings();
         Set<Character> characters = userSpecification.getCharacters();
-        if (minLength < 1) {
-            throw new SpecificationNotValidException("Minimal length cannot be less than 1");
-        }
         if (minLength > maxLength) {
             throw new SpecificationNotValidException("Minimal length cannot be greater than maximal length");
         }
