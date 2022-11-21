@@ -1,5 +1,6 @@
 package michalmlynarczyk.recruitmenttask.service;
 
+import lombok.RequiredArgsConstructor;
 import michalmlynarczyk.recruitmenttask.dto.UserSpecificationDTO;
 import michalmlynarczyk.recruitmenttask.entity.UserSpecification;
 import michalmlynarczyk.recruitmenttask.entity.UserSpecificationRepository;
@@ -8,29 +9,19 @@ import michalmlynarczyk.recruitmenttask.exception.SpecificationNotValidException
 import michalmlynarczyk.recruitmenttask.task.GenerateRandomStringsTask;
 import michalmlynarczyk.recruitmenttask.utils.UserSpecificationValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
+@RequiredArgsConstructor
 public class ServiceImpl implements Service {
+    @Qualifier("taskExecutor")
     private final ThreadPoolTaskExecutor taskExecutor;
     private final UserSpecificationValidator validator;
     private final UserSpecificationRepository repository;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public ServiceImpl(@Qualifier("taskExecutor") ThreadPoolTaskExecutor taskExecutor,
-                       UserSpecificationValidator validator,
-                       UserSpecificationRepository repository,
-                       ModelMapper modelMapper) {
-        this.taskExecutor = taskExecutor;
-        this.validator = validator;
-        this.repository = repository;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public UserSpecification saveUserSpecification(UserSpecificationDTO userSpecificationDTO) {
