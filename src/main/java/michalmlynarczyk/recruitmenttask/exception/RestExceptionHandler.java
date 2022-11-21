@@ -14,9 +14,12 @@ import java.util.Objects;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.unprocessableEntity().body(ex.getCause().getMessage());
+    @ExceptionHandler(ServiceLayerException.class)
+    public ResponseEntity<Object> handleServiceLayerException(ServiceLayerException ex) {
+        if (ex.getCause() != null) {
+            return ResponseEntity.unprocessableEntity().body(ex.getCause().getMessage());
+        }
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @Override
